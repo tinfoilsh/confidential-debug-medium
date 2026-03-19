@@ -1,6 +1,6 @@
 cvm-version: 0.7.3
-cpus: 4
-memory: 8192
+cpus: 16
+memory: 65536
 
 shim:
   upstream-port: 8080
