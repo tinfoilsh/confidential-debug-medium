@@ -1,7 +1,20 @@
-cvm-version: 0.7.3
+cvm-version: 0.10.4
 cpus: 16
 memory: 65536
 
 shim:
   upstream-port: 8080
   tls-mode: self-signed
+
+containers:
+  - name: "bridge-upstream"
+    image: "docker.io/library/busybox:latest"
+    restart: always
+    tmpfs:
+      /srv: "size=64k,mode=0755"
+    command:
+      - /bin/sh
+      - -c
+      - |
+        printf 'bridge-mode-OK\n' > /srv/tinfoil-marker
+        exec httpd -f -p 0.0.0.0:8080 -h /srv
